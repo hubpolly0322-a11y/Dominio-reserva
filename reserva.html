@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dominia Reserva | Propiedades verificadas</title>
+
+<style>
+:root {
+  --azul: #0E1A2B;
+  --dorado: #C6A75E;
+  --gris: #f4f4f4;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: var(--gris);
+  color: #222;
+}
+
+/* HEADER */
+header {
+  background: var(--azul);
+  color: white;
+  padding: 25px 50px;
+  display: flex;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-icon {
+  width: 45px;
+  height: 45px;
+  border: 2px solid var(--dorado);
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dorado);
+  font-weight: bold;
+}
+
+.logo-text {
+  font-size: 22px;
+  letter-spacing: 2px;
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(rgba(14,26,43,0.85), rgba(14,26,43,0.85)),
+              url('https://images.unsplash.com/photo-1568605114967-8130f3a36994') center/cover;
+  padding: 100px 40px;
+  text-align: center;
+  color: white;
+}
+
+.hero h1 {
+  font-size: 42px;
+}
+
+.hero p {
+  font-size: 18px;
+  max-width: 700px;
+  margin: auto;
+}
+
+.hero button {
+  margin-top: 35px;
+  padding: 18px 40px;
+  font-size: 16px;
+  background: var(--dorado);
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* MODALS */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-box {
+  background: white;
+  width: 90%;
+  max-width: 500px;
+  padding: 40px;
+  border-radius: 12px;
+}
+
+.modal-box h2 {
+  color: var(--azul);
+  margin-bottom: 20px;
+}
+
+.modal-box input,
+.modal-box select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+}
+
+.modal-box button {
+  width: 100%;
+  padding: 15px;
+  background: var(--dorado);
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cancelar {
+  margin-top: 15px;
+  background: var(--azul);
+  color: white;
+}
+
+/* TARJETA DE MONTO */
+.tarjeta-monto {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 22px;
+  margin: 25px 0;
+  background: linear-gradient(135deg, #0E1A2B, #1c2f4a);
+  border-radius: 12px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+  color: white;
+}
+
+.icono-pago {
+  font-size: 36px;
+  background: #C6A75E;
+  color: #0E1A2B;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.texto-monto {
+  display: flex;
+  flex-direction: column;
+}
+
+.label-monto {
+  font-size: 13px;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.valor-monto {
+  font-size: 30px;
+  font-weight: bold;
+  margin: 6px 0;
+  color: #C6A75E;
+}
+
+.nota-monto {
+  font-size: 13px;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">DR</div>
+    <div class="logo-text">DOMINIA RESERVA</div>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Propiedades verificadas en República Dominicana</h1>
+  <p>
+    Compra casas y apartamentos mediante un proceso privado,
+    seguro y controlado.
+  </p>
+  <button onclick="abrirProceso()">Iniciar proceso de compra</button>
+</section>
+
+<!-- MODAL 1 -->
+<div id="modalProceso" class="modal">
+  <div class="modal-box">
+    <h2>Datos del solicitante</h2>
+
+    <input type="text" placeholder="Nombre completo">
+    <input type="email" placeholder="Correo electrónico">
+    <input type="text" placeholder="Documento de identidad">
+
+    <select>
+      <option>Tarjeta (Visa / Mastercard)</option>
+    </select>
+
+    <button onclick="continuarPago()">Continuar proceso</button>
+    <button class="cancelar" onclick="cerrarProceso()">Cancelar</button>
+  </div>
+</div>
+
+<!-- MODAL 2 -->
+<div id="modalPago" class="modal">
+  <div class="modal-box">
+    <h2>Pago de intención de compra</h2>
+
+    <div class="tarjeta-monto">
+      <div class="icono-pago">💳</div>
+      <div class="texto-monto">
+        <span class="label-monto">Pago de intención</span>
+        <span class="valor-monto">USD $100</span>
+        <span class="nota-monto">
+          Este pago confirma su interés real y habilita la siguiente etapa del proceso.
+        </span>
+      </div>
+    </div>
+
+    <button onclick="finalizarProceso()">Proceder al pago</button>
+    <button class="cancelar" onclick="cerrarPago()">Cancelar</button>
+  </div>
+</div>
+
+<!-- STRIPE INTEGRADO -->
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+const stripe = Stripe("pk_test_51T229eQPMMoFvwRZcTwiPJvy2BNgnXufzGTIsBc3LcwAbqPyXNn6p3r669udB8RoQEaaEvaMHshuz8iDiEXTVgZ500d26FYFQV");
+
+function abrirProceso() {
+  document.getElementById("modalProceso").style.display = "flex";
+}
+
+function cerrarProceso() {
+  document.getElementById("modalProceso").style.display = "none";
+}
+
+function continuarPago() {
+  document.getElementById("modalProceso").style.display = "none";
+  document.getElementById("modalPago").style.display = "flex";
+}
+
+function cerrarPago() {
+  document.getElementById("modalPago").style.display = "none";
+}
+
+function finalizarProceso() {
+  fetch("/crear-sesion", {
+    method: "POST"
+  })
+  .then(res => res.json())
+  .then(data => {
+    return stripe.redirectToCheckout({
+      sessionId: data.id
+    });
+  })
+  .catch(error => {
+    alert("Error al iniciar el pago.");
+    console.error(error);
+  });
+}
+</script>
+
+</body>
+</html>
+
+
